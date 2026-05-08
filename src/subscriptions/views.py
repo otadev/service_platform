@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from subscriptions.models import Tariff, UserSubscription
 from subscriptions.serializers import TariffSerializer, UserSubscriptionSerializer
@@ -8,6 +8,7 @@ from subscriptions.serializers import TariffSerializer, UserSubscriptionSerializ
 class TariffViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Tariff.objects.all()
     serializer_class = TariffSerializer
+    permission_classes = [AllowAny]
 
 
 class UserSubscriptionViewSet(viewsets.ModelViewSet):

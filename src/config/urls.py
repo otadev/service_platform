@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
+from products.views import OrderViewSet
 from subscriptions.views import TariffViewSet, UserSubscriptionViewSet
 
 urlpatterns = [
@@ -28,5 +29,6 @@ urlpatterns = [
 router = routers.DefaultRouter()
 router.register(r'api/tariffs', TariffViewSet)
 router.register(r'api/subscriptions', UserSubscriptionViewSet, basename='subscription')
+router.register(r'api/orders', OrderViewSet, basename='order')
 
 urlpatterns += router.urls
