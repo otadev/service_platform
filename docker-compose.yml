@@ -24,3 +24,16 @@ services:
 #
 #   volumes:
 #     - postgres_data:/var/lib/postgresql/data
+  bot:
+    build:
+      context: .
+    volumes:
+      - ./src:/app
+    env_file:
+      - .env
+    command: python bot/main.py
+    depends_on:
+      - database
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
