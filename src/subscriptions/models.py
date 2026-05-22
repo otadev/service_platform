@@ -22,10 +22,13 @@ class UserSubscription(models.Model):
     end_date = models.DateField(blank=True, null=True)
     comment = models.CharField(max_length=100, default='', db_index=True)
 
-    def save(self, *args, **kwargs):
-        if self._state.adding and not self.end_date: #проверка на объект создается или обновляется
-            self.end_date = (self.start_date + timedelta(days=self.tariff.duration_days)) #добавление к дате создания длительность тарифа
-        super().save(*args, **kwargs) #сохранение в базе данных
+    @classmethod
+    def create(cls, user, tariff, price=0, comment='', start_date=None, end_date=None):
+        if start_date is None:
+            start_date = date.today()
+        if end_date is None and tariff is not None:
+            end_date = start_date + timedelta(days=tariff.duration_days)
+        return cls.objects.create(user=user, tariff=tariff, price=price, start_date=start_date, end_date=end_date, comment=comment)
 
 
     def __str__(self):

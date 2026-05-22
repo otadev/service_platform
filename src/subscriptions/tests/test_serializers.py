@@ -122,7 +122,7 @@ class UserSubscriptionSerializerTest(TestCase):
             self.assertIn(field, s.data)
 
     def test_end_date_serialized_as_date_string(self):
-        sub = UserSubscription.objects.create(user=self.user, tariff=self.tariff)
+        sub = UserSubscription.create(user=self.user, tariff=self.tariff)
         s = UserSubscriptionSerializer(sub)
         # должна быть строка вида "YYYY-MM-DD", не datetime
         self.assertRegex(s.data["end_date"], r"^\d{4}-\d{2}-\d{2}$")

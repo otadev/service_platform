@@ -269,7 +269,7 @@ class SubscriptionBusinessLogicTests(UserSubscriptionAPITestCase): #BUSINESS-LOG
 
     def test_subscription_is_active_within_dates(self):
         """Helper: проверьте наличие свойства is_active или аннотации, если таковые имеются."""
-        sub = UserSubscription.objects.create(
+        sub = UserSubscription.create(
             user=self.user,
             tariff=self.tariff_monthly,
             price=0,

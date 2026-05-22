@@ -11,3 +11,6 @@ class UserSubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserSubscription
         fields = '__all__'
+
+    def create(self, validated_data):
+        return UserSubscription.create(**validated_data)
